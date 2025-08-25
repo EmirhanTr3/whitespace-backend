@@ -9,7 +9,7 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(uuid())
+  id            String    @id @default("unknown")
   name          String    @unique
   displayname   String
   email         String    @unique
@@ -33,7 +33,7 @@ enum Rank {
 }
 
 model Member {
-  id       String    @id @default(uuid())
+  id       String    @id @default("unknown")
   userId   String
   user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   guildId  String
@@ -44,7 +44,7 @@ model Member {
 }
 
 model Guild {
-  id        String    @id @default(uuid())
+  id        String    @id @default("unknown")
   name      String
   icon      String?
   channels  Channel[]
@@ -55,7 +55,7 @@ model Guild {
 }
 
 model Channel {
-  id        String    @id @default(uuid())
+  id        String    @id @default("unknown")
   name      String
   guildId   String
   guild     Guild     @relation(fields: [guildId], references: [id], onDelete: Cascade)
@@ -64,7 +64,7 @@ model Channel {
 }
 
 model Message {
-  id        String   @id @default(uuid())
+  id        String   @id @default("unknown")
   channelId String
   channel   Channel  @relation(fields: [channelId], references: [id], onDelete: Cascade)
   authorId  String
@@ -74,7 +74,7 @@ model Message {
 }
 
 model Session {
-  id        String   @id @default(uuid())
+  id        String   @id @default("unknown")
   expiresAt DateTime
   token     String
   createdAt DateTime
@@ -89,7 +89,7 @@ model Session {
 }
 
 model Account {
-  id                    String    @id @default(uuid())
+  id                    String    @id @default("unknown")
   accountId             String
   providerId            String
   userId                String
@@ -108,7 +108,7 @@ model Account {
 }
 
 model Verification {
-  id         String    @id @default(uuid())
+  id         String    @id @default("unknown")
   identifier String
   value      String
   expiresAt  DateTime

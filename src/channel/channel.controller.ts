@@ -87,7 +87,7 @@ export class ChannelController {
 
     @Delete(":id")
     @HttpCode(204)
-    async deleteGuild(@Session() session: UserSession, @Res({ passthrough: true }) response: Response, @Param("guildId") guildId: string, @Param("id") id: string) {
+    async deleteChannel(@Session() session: UserSession, @Res({ passthrough: true }) response: Response, @Param("guildId") guildId: string, @Param("id") id: string) {
         const user = session.user;
 
         const exists = await this.channelService.existsAsOwner(id, user.id);
@@ -103,6 +103,7 @@ export class ChannelController {
             where: {
                 id,
                 guild: {
+                    id: guildId,
                     ownerId: user.id
                 }
             }
